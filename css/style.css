@@ -1,3 +1,90 @@
 body {
-  background-color: brown;
+  background-color:darkblue;
+}
+
+body,html {
+  width:100%;
+  margin:0px;
+  padding:0px;
+}
+
+h1 {
+  font-family: 'Crimson Text', serif;
+  text-align: center;
+  color: greenyellow;
+  font-size: 100px;
+}
+
+h2 {
+  font-family: 'Crimson Text', serif;
+  text-align: center;
+  color: greenyellow;
+  font-size: 30px;
+  margin: -70px;
+}
+
+.word {
+  width:60%;
+  height:300px;
+  border-radius:5px;
+  border:1px
+  solid transparent;
+  margin-left:20%;
+  margin-top:100px
+}
+
+.word-section {
+  width:100%;
+  margin-top:50px;
+  text-align:center;
+  height:100px;
+  font-size:30px;
+  color:blue;font-size:50px;
+  color:white;
+}
+
+.answer-section {
+  width:50%;
+  height:50px;
+  border:1px solid grey;
+  margin-top:20px;
+  margin-left:25%;
+  margin-bottom: 20px;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+#answer {
+  width:80%;
+  text-align:center;
+  float:left;
+  height:90%;
+  border:none;
+  font-family:sans-serif;
+  font-size:30px;
+  background:transparent;
+  color:darkgrey;
+}
+
+.submit {
+  width:19%;
+  float:right;
+  height:100%;
+  border:none;
+  background-color: greenyellow;
+  font-family:sans-serif;
+  font-size:20px;
+  color: darkblue;
+}
+
+#letter {
+  height:70px;
+  width:70px;
+  border-radius:3px;
+  text-align:center;
+  border:1.5px solid grey;
+  color:darkgrey;
+  font-family:sans-serif;
+  font-size:50px;
+  margin-right:2px
 }
