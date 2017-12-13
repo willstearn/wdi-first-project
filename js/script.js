@@ -1,8 +1,13 @@
 $(() => {
 
-  var words = ['Vitriolic','Specious','Platitude','Conceited','Obtuse','Assiduous','Portend','Hubris','Incandescent','Entreaties','Loquacious','Fatuous','Prophylaxis','Obsequious','Groundswell','Vapid','Resonate','Excoriates','Sequestered','Commendable','Misgivings','Askance','Parsimonious','Parlous','Decorum','Perfunctory','Acerbic','Obstreperous','Pejorative','Jettison','Deference','Ebullient','Inveterate','Fascile','Mainspring','Circumspect','Martial','Yardstick','Scintilla','Bootstrap','Assinine','Taciturn','Carousing','Pernicious','Pastiche','Retrograde','Cavalier','Abstruse','Propitiate','Hackneyed','Hoodwink','Jaundiced','Earmark','Mainstay','Nettlesome','Redolent','Frogmarch','Doyenne','Magnanimous','Lilliputian','Vaudevillian','Admonish','Moribund','Pallid','Fastidious','Sanguine','Delineate','Capricious','Restitution','Megalomania','Corraled','Vacillate','Gregarious','Specious','Vertiginous','Remiss','Flippant','Lascivious','Apopleptic','Axiomatic'];
+  var words = ['vitriolic','specious','platitude','conceited','obtuse','assiduous','portend','hubris','incandescent','entreaties','loquacious','fatuous','prophylaxis','obsequious','groundswell','vapid','resonate','excoriates','sequestered','commendable','misgivings','askance','parsimonious','parlous','decorum','perfunctory','acerbic','obstreperous','pejorative','jettison','deference','ebullient','inveterate','fascile','mainspring','circumspect','martial','yardstick','scintilla','bootstrap','assinine','taciturn','carousing','pernicious','pastiche','retrograde','cavalier','abstruse','propitiate','hackneyed','hoodwink','jaundiced','earmark','mainstay','nettlesome','redolent','frogmarch','doyenne','magnanimous','lilliputian','vaudevillian','admonish','moribund','pallid','fastidious','sanguine','delineate','capricious','restitution','megalomania','corraled','vacillate','gregarious','specious','vertiginous','remiss','flippant','lascivious','apopleptic','axiomatic'];
   var originalWord = null;
   var intervalStart = null;
+  var score = 0;
+  var timer = null;
+  var hint = null;
+  var reward = null;
+  var lives = null;
 
   // gets a random word (originalWord) from array of words (wordsArray)
   function play() {
@@ -28,15 +33,22 @@ $(() => {
   function checkAnswer() {
     var ans = $('#answer').val();
     if(ans === originalWord) {
-      window.alert('Well done! You matched a word');
+      updateScore();
     } else {
       window.alert('Sorry! Try again');
     }
+    //play();
+    //intervalStart=setInterval(play,15000);
   }
 
   $('.submit').click(function() {
     checkAnswer();
   });
+
+  function updateScore() {
+    score=score+1;
+    $('#score').innerHTML=score;
+  }
 
   // sets interval of emptying table to 15s
   intervalStart = setInterval(play,15000);

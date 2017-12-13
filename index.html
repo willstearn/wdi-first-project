@@ -4,13 +4,16 @@
 	<meta charset="utf-8">
 	<title>Verbal Diarrhoea</title>
   <link rel="stylesheet" href="./css/style.css">
-  <script src="./js/script.js"></script>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Crimson+Text|Indie+Flower" rel="stylesheet">
 </head>
 <body>
   <h1>Verbal Diarrhoea.</h1>
-  <h2>Unscramble the letters to solve the conundrum</h2>
+  <h2>Unscramble the letters to solve the anagram</h2>
+  <div class="scoreandtimer">
+    <h3>Score</h3><h3 id="score"></h3><br>
+    <p id="timer"></p>
+  </div>
     <div class="view">
     	<div class="word">
     		<div class="word-section">
@@ -24,5 +27,6 @@
     		<button class="submit">submit</button>
     	</div>
     </div>
+    <script src="./js/script.js"></script>
 </body>
 </html>
