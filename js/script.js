@@ -9,7 +9,22 @@ $(() => {
   //    }
   //   ];
 
-  var words = ['vitriolic','specious','platitude','conceited','obtuse','assiduous','portend','hubris','incandescent','entreaties','loquacious','fatuous','prophylaxis','obsequious','groundswell','vapid','resonate','excoriates','sequestered','commendable','misgivings','askance','parsimonious','parlous','decorum','perfunctory','acerbic','obstreperous','pejorative','jettison','deference','ebullient','inveterate','fascile','mainspring','circumspect','martial','yardstick','scintilla','bootstrap','assinine','taciturn','carousing','pernicious','pastiche','retrograde','cavalier','abstruse','propitiate','hackneyed','hoodwink','jaundiced','earmark','mainstay','nettlesome','redolent','frogmarch','doyenne','magnanimous','lilliputian','vaudevillian','admonish','moribund','pallid','fastidious','sanguine','delineate','capricious','restitution','megalomania','corraled','vacillate','gregarious','specious','vertiginous','remiss','flippant','lascivious','apopleptic','axiomatic'];
+  var words = ['vitriolic','specious','platitude','conceited','obtuse','assiduous','portend','hubris','incandescent','entreaty','loquacious','fatuous','prophylaxis','obsequious','groundswell','vapid','resonate','excoriates','sequestered','commendable','misgivings','askance','parsimonious','parlous','decorum','perfunctory','acerbic','obstreperous','pejorative','jettison','deference','ebullient','inveterate','fascile','mainspring','circumspect','martial','yardstick','scintilla','bootstrap','assinine','taciturn','carousing','pernicious','pastiche','retrograde','cavalier','abstruse','propitiate','hackneyed','hoodwink','jaundiced','earmark','mainstay','nettlesome','redolent','frogmarch','doyenne','magnanimous','lilliputian','vaudevillian','admonish','moribund','pallid','fastidious','sanguine','delineate','capricious','restitution','megalomania','corraled','vacillate','gregarious','specious','vertiginous','remiss','flippant','lascivious','apopleptic','axiomatic'];
+  var obj=[
+    {
+      word:words[0],
+      hint1:'hint first',
+      hint2:'hint second',
+      hint3:'hint third'
+    },
+    {
+      word:words[1],
+      hint1:'hint first',
+      hint2:'hint second',
+      hint3:'hint third'
+    }
+
+  ];
   var originalWord = null;
   var intervalStart = null;
   var score = 0;
@@ -19,14 +34,18 @@ $(() => {
   var reward = null;
   var energyBar=$('#filling');
   var energy= 0;
+  // $("#hint1-button").hide();
+  $("#hint2-button").hide();
+  $("#hint3-button").hide();
+  // $('#hint1').hide();
+  $('#hint2').hide();
+  $('#hint3').hide();
 
 
   // gets a random word (originalWord) from array of words (wordsArray)
   function play() {
     $('.question').empty();
-    $('.answer').empty();
-
-    var randomNumber = Math.floor(Math.random() * 1);
+    var randomNumber = Math.floor(Math.random() * 2);
     originalWord = words[randomNumber];
     console.log(originalWord);
 
@@ -75,6 +94,8 @@ $(() => {
 
   $('.submit').click(function() {
     checkAnswer();
+    $('#answer').val('');
+
   });
 
   // function updateScore() {
@@ -92,6 +113,8 @@ $(() => {
   // sets interval of emptying table to 15s
   intervalStart = setInterval(play,15000);
   play();
+
+  clearInterval(intervalStart);
 
   function isWin(){
     if(energy>=100){
