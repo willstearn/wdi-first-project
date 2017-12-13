@@ -13,19 +13,29 @@ $(() => {
   var originalWord = null;
   var intervalStart = null;
   var score = 0;
-  var timer = null;
+  var timer = 59;
+  var timeBoard=$('#time');
   var hint = null;
   var reward = null;
-  var energyFill = $('#energy');
-  var energyBar = 0;
+  var energyBar=$('#filling');
+  var energy= 0;
 
 
   // gets a random word (originalWord) from array of words (wordsArray)
   function play() {
     $('.question').empty();
-    var randomNumber = Math.floor(Math.random() * words.length);
+    var randomNumber = Math.floor(Math.random() * 1);
     originalWord = words[randomNumber];
     console.log(originalWord);
+
+    function updateTimer(){
+      timer=59;
+    }
+    function tim(){
+      timeBoard.empty()
+      timeBoard.append(timer);
+      timer=timer-1;
+    }
 
     // shuffles (shuffled) the original word (originalWord)
     var shuffled = originalWord.split('').sort(function() {
@@ -38,6 +48,8 @@ $(() => {
       var shuffledWord=shuffled.split('');
       $('.question').append("<td id='letter'>"+shuffledWord[i]+"</td>");
     }
+    updateTimer();
+
     console.log(shuffledWord);
   }
   // checks answer (checkAnswer) submitted by user against original word (originalWord)
@@ -45,12 +57,17 @@ $(() => {
     var ans = $('#answer').val();
     if(ans === originalWord) {
       updateEnergy();
+      isWin();
     } else {
       window.alert('Sorry! Try again');
     }
     //play();
     //intervalStart=setInterval(play,15000);
   }
+
+
+
+
 
   $('.submit').click(function() {
     checkAnswer();
@@ -61,13 +78,24 @@ $(() => {
   //   $('#score').innerHTML=score;
   // }
 
-  function updateEnergy() {
-    energy = energy+10;
-    energyBar.css({"height":energy+"%"});
+  function updateEnergy(){
+    energy=energy+40;
+    energyBar.css({"width":energy+"%"});
   }
+  updateEnergy();
+
 
   // sets interval of emptying table to 15s
   intervalStart = setInterval(play,15000);
   play();
+
+  function isWin(){
+    if(energy>=100){
+      window.alert("you win");
+      clearInterval(timer);
+      clearInterval(intervalStart);
+    }
+
+  }
 
 });

@@ -10,14 +10,26 @@
   <link href="https://fonts.googleapis.com/css?family=Crimson+Text|Indie+Flower" rel="stylesheet">
 </head>
 <body>
-  <h1>Verbal Diarrhoea.</h1>
-  <h2>Unscramble the letters to solve the anagram</h2>
-</div>
-  <div class="energy-section">
-    <center>
-    <div class="energy-bar">
-      <div id="filling"></div>
+  <div class="top-section">
+    <div class="score-section">
     </div>
+    <div class="title-section">
+      <h1>Verbal Diarrhoea.</h1>
+      <h2>Unscramble the letters to solve the anagram</h2>
+    </div>
+    <div class="energy-section">
+      <center>
+      <div class="energy-bar">
+        <div id="filling"></div>
+      </div>
+      <div class="timer-circle">
+        <br>
+        <label class="timer-label"></label><br>
+        <strong id="time">60</strong>
+      </div>
+    </center>
+    </div>
+  </div>
     <div class="view">
     	<div class="word">
     		<div class="word-section">
@@ -30,8 +42,6 @@
     		<input type="text" name="" id="answer" placeholder="type your answer here">
     		<button class="submit">submit</button>
     	</div>
-    </center>
-
     </div>
     <script src="./js/script.js"></script>
 </body>
