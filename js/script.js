@@ -1,5 +1,14 @@
 $(() => {
 
+  // var words = [
+  //    {
+  //      word: ‘word1’,
+  //      hint1: ‘hint1A’
+  //      hint2: ‘hintB’
+  //       hint3: ‘hintC’
+  //    }
+  //   ];
+
   var words = ['vitriolic','specious','platitude','conceited','obtuse','assiduous','portend','hubris','incandescent','entreaties','loquacious','fatuous','prophylaxis','obsequious','groundswell','vapid','resonate','excoriates','sequestered','commendable','misgivings','askance','parsimonious','parlous','decorum','perfunctory','acerbic','obstreperous','pejorative','jettison','deference','ebullient','inveterate','fascile','mainspring','circumspect','martial','yardstick','scintilla','bootstrap','assinine','taciturn','carousing','pernicious','pastiche','retrograde','cavalier','abstruse','propitiate','hackneyed','hoodwink','jaundiced','earmark','mainstay','nettlesome','redolent','frogmarch','doyenne','magnanimous','lilliputian','vaudevillian','admonish','moribund','pallid','fastidious','sanguine','delineate','capricious','restitution','megalomania','corraled','vacillate','gregarious','specious','vertiginous','remiss','flippant','lascivious','apopleptic','axiomatic'];
   var originalWord = null;
   var intervalStart = null;
@@ -7,7 +16,9 @@ $(() => {
   var timer = null;
   var hint = null;
   var reward = null;
-  var lives = null;
+  var energyFill = $('#energy');
+  var energyBar = 0;
+
 
   // gets a random word (originalWord) from array of words (wordsArray)
   function play() {
@@ -33,7 +44,7 @@ $(() => {
   function checkAnswer() {
     var ans = $('#answer').val();
     if(ans === originalWord) {
-      updateScore();
+      updateEnergy();
     } else {
       window.alert('Sorry! Try again');
     }
@@ -45,9 +56,14 @@ $(() => {
     checkAnswer();
   });
 
-  function updateScore() {
-    score=score+1;
-    $('#score').innerHTML=score;
+  // function updateScore() {
+  //   score=score+10; // use the score variable to update the css height of the inner energy bar div
+  //   $('#score').innerHTML=score;
+  // }
+
+  function updateEnergy() {
+    energy = energy+10;
+    energyBar.css({"height":energy+"%"});
   }
 
   // sets interval of emptying table to 15s
