@@ -24,12 +24,16 @@ $(() => {
   // gets a random word (originalWord) from array of words (wordsArray)
   function play() {
     $('.question').empty();
+    $('.answer').empty();
+
     var randomNumber = Math.floor(Math.random() * 1);
     originalWord = words[randomNumber];
     console.log(originalWord);
 
     function updateTimer(){
       timer=59;
+      timeInterval=setInterval(tim,1000);
+
     }
     function tim(){
       timeBoard.empty()
