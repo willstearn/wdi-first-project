@@ -13,16 +13,29 @@ $(() => {
   var obj=[
     {
       word:words[0],
-      hint1:'hint first',
-      hint2:'hint second',
-      hint3:'hint third'
+      hint1:'first letter is v',
+      hint2:'bitter. e.g. _________ attacks on the politicians',
+      hint3:'last letter is c'
     },
     {
       word:words[1],
-      hint1:'hint first',
-      hint2:'hint second',
-      hint3:'hint third'
+      hint1:'first letter is s',
+      hint2:'plausible but wrong. e.g. a ________ argument',
+      hint3:'last letter is s'
+    },
+    {
+      word:words[2],
+      hint1:'first letter is p',
+      hint2:'un-interesting comment. e.g. she began uttering liberal __________',
+      hint3:'last letter is e'
+    },
+    {
+      word:words[3],
+      hint1:'first letter is s',
+      hint2:'plausible but wrong. e.g. a ________ argument',
+      hint3:'last letter is s'
     }
+
 
   ];
   var originalWord = null;
@@ -81,6 +94,7 @@ $(() => {
     if(ans === originalWord) {
       updateEnergy();
       isWin();
+      play();
     } else {
       window.alert('Sorry! Try again');
     }
