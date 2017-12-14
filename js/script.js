@@ -111,17 +111,25 @@ $(() => {
 //   $('#score').innerHTML=score;
 // }
 
-function updateEnergy(){
-  energy=energy+40;
-  energyBar.css({"width":energy+"%"});
-}
 updateEnergy();
+updateSc();
 
 
 // sets interval of emptying table to 15s
 
+intervalStart = setInterval(play,61000);
+play();
 
-clearInterval(intervalStart);
+function updateEnergy(){
+  energy=energy+40;
+  energyBar.css({"width":energy+"%"});
+}
+
+function updateSc(){
+  score=score+1;
+  scoreBoard.empty()
+  scoreBoard.append(score);
+}
 
 function isWin(){
   if(energy>=100){
@@ -131,37 +139,35 @@ function isWin(){
   }
 
 }
-intervalStart = setInterval(play,61000);
-play();
-
-
 function updateTimer(){
+  if(timer<=0){
+      clearInterval(setInterval);
+    }
   timer=59;
   timeInterval=setInterval(tim,1000);
 
-  function updateSc(){
-    score=score+1;
-    scoreBoard.empty()
-    scoreBoard.append(score);
-  }
 
+
+}
+function tim(){
+  timeBoard.empty()
+  timeBoard.append(timer);
+  timer=timer-1;
+console.log(timer);
 }
 
 function play() {
   $('.question').empty();
+  if(firstTime==true){
+    clearInterval(timeInterval);
+  };
+  firstTime=true;
+  initializer();
+
   var randomNumber = Math.floor(Math.random() * 11);
   originalWord = words[randomNumber];
   console.log(originalWord);
 
-
-
-
-  function tim(){
-    timeBoard.empty()
-    timeBoard.append(timer);
-    timer=timer-1;
-  }
-  updateSc();
 
   // shuffles (shuffled) the original word (originalWord)
   var shuffled = originalWord.split('').sort(function() {
@@ -178,12 +184,6 @@ function play() {
   console.log(shuffledWord);
 }
 // checks answer (checkAnswer) submitted by user against original word (originalWord)
-
-
-
-
-
-
 
 function checkAnswer() {
   var ans = $('#answer').val();
