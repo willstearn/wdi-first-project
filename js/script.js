@@ -98,101 +98,106 @@ $(() => {
   $('#hint2').hide();
   $('#hint3').hide();
 
-
-
-updateTimer()
-updateEnergy();
-updateSc();
-
-function updateEnergy(){
-  energy=energy+40;
-  energyBar.css({"width":energy+"%"});
+function initializer(){
+  updateTimer()
 }
 
-function updateSc(){
-  score=score+1;
-  scoreBoard.empty()
-  scoreBoard.append(score);
-}
+  updateEnergy();
+  updateSc();
 
-function isWin(){
-  if(energy>=100){
-    window.alert("Great effort! Play again?");
-    clearInterval(timer);
-    clearInterval(intervalStart);
+  function updateEnergy(){
+    energy=energy+40;
+    energyBar.css({"width":energy+"%"});
   }
 
-}
-function updateTimer(){
-  if(timer<=0){
+  function updateSc(){
+    score=score+1;
+    scoreBoard.empty()
+    scoreBoard.append(score);
+  }
+
+  function giveAnswer() {
+   window.alert("The answer is" + " " + originalWord);
+ };
+
+  function isWin(){
+    if(energy>=100){
+      window.alert("Great effort! Play again?");
+      location.reload();
+      clearInterval(timer);
+      clearInterval(intervalStart);
+    }
+
+  }
+  function updateTimer(){
+    if(timer<=0){
+      giveAnswer();
       clearInterval(setInterval);
     }
-  timer=59;
-  timeInterval=setInterval(tim,1000);
+    timer=59;
+    timeInterval=setInterval(tim,1000);
 
 
-}
-function tim(){
-  timeBoard.empty()
-  timeBoard.append(timer);
-  timer=timer-1;
-console.log(timer);
-}
-
-
-
-
-function play() {
-  $('.question').empty();
-  if(firstTime==true){
-    clearInterval(timeInterval);
-  };
-  firstTime=true;
-  var randomNumber = Math.floor(Math.random() * 11);
-  originalWord = words[randomNumber];
-  console.log(originalWord);
-
-
-
-
-
-
-  var shuffled = originalWord.split('').sort(function() {
-    return 0.5 - Math.random();
-  }).join('');
-  console.log(shuffled);
-
-  for(let i=0;i<shuffled.length;i++) {
-    var shuffledWord=shuffled.split('');
-    $('.question').append("<td id='letter'>"+shuffledWord[i]+"</td>");
+  }
+  function tim(){
+    timeBoard.empty()
+    timeBoard.append(timer);
+    timer=timer-1;
+    console.log(timer);
   }
 
-  console.log(shuffledWord);
-}
 
-function checkAnswer() {
-  var ans = $('#answer').val();
-  if(ans === originalWord) {
-    updateEnergy();
-    updateSc();
-    isWin();
-    clearInterval(timeInterval);
-    updateTimer();
-    play();
-    intervalStart=setInterval(play,60000);
-  } else {
-    window.alert("The answer is" + " " + originalWord);
+
+
+  function play() {
+    $('.question').empty();
+    if(firstTime==true){
+      clearInterval(timeInterval);
+    };
+    firstTime=true;
+    initializer();
+    var randomNumber = Math.floor(Math.random() * 11);
+    originalWord = words[randomNumber];
+    console.log(originalWord);
+
+    var shuffled = originalWord.split('').sort(function() {
+      return 0.5 - Math.random();
+    }).join('');
+    console.log(shuffled);
+
+    for(let i=0;i<shuffled.length;i++) {
+      var shuffledWord=shuffled.split('');
+      $('.question').append("<td id='letter'>"+shuffledWord[i]+"</td>");
+    }
+
+    console.log(shuffledWord);
   }
 
-}
+  function checkAnswer() {
+    var ans = $('#answer').val();
+    if(ans == originalWord) {
+      updateEnergy();
+      updateSc();
+      isWin();
+      play();
+      clearInterval(intervalStart);
+      clearInterval(timeInterval);
+      intervalStart=setInterval(play,60000);
+      updateTimer();
+    } else {
+      window.alert("Sorry! Wait for clues to appear and try again!");
+    }
+
+  }
 
 
-$('.submit').click(function() {
-  checkAnswer();
-  $('#answer').val('');
+  $('.submit').click(function() {
+    checkAnswer();
+    $('#answer').val('');
 
-});
-intervalStart = setInterval(play,61000);
-play();
+
+  });
+  intervalStart = setInterval(play,61000);
+  play();
 
 });
