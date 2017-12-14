@@ -100,7 +100,7 @@ $(() => {
 
 
 
-
+updateTimer()
 updateEnergy();
 updateSc();
 
@@ -139,17 +139,22 @@ function tim(){
 console.log(timer);
 }
 
+
+
+
 function play() {
   $('.question').empty();
   if(firstTime==true){
     clearInterval(timeInterval);
   };
   firstTime=true;
-  initializer();
-
   var randomNumber = Math.floor(Math.random() * 11);
   originalWord = words[randomNumber];
   console.log(originalWord);
+
+
+
+
 
 
   var shuffled = originalWord.split('').sort(function() {
@@ -174,6 +179,7 @@ function checkAnswer() {
     clearInterval(timeInterval);
     updateTimer();
     play();
+    intervalStart=setInterval(play,60000);
   } else {
     window.alert("The answer is" + " " + originalWord);
   }
