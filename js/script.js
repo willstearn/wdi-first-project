@@ -31,12 +31,52 @@ $(() => {
     },
     {
       word:words[3],
-      hint1:'first letter is s',
-      hint2:'plausible but wrong. e.g. a ________ argument',
+      hint1:'first letter is c',
+      hint2:'proudly vain. e.g. Ben is so _________',
+      hint3:'last letter is d'
+    },
+    {
+      word:words[4],
+      hint1:'first letter is o',
+      hint2:'annoyingly insensitive. e.g. the doctor was being _________',
+      hint3:'last letter is e'
+    },
+    {
+      word:words[5],
+      hint1:'first letter is a',
+      hint2: 'showing great care and perseverance. e.g. she was __________ in her work',
       hint3:'last letter is s'
-    }
-
-
+    },
+    {
+      word:words[6],
+      hint1:'first letter is p',
+      hint2: 'sign or warning. e.g. the eclipses _______ some major events',
+      hint3:'last letter is d'
+    },
+    {
+      word:words[7],
+      hint1:'first letter is h',
+      hint2:'excessive pride or self-confidence. e.g. economists are filled with _________',
+      hint3:'last letter is s'
+    },
+    {
+      word:words[8],
+      hint1:'first letter is i',
+      hint2: 'full of strong emotion. e.g. __________ with rage',
+      hint3:'last letter is t'
+    },
+    {
+      word:words[9],
+      hint1:'first letter is e',
+      hint2: 'earnest or humble request. e.g. the king was deaf to his _______',
+      hint3:'last letter is y'
+    },
+    {
+      word:words[10],
+      hint1:'first letter is l',
+      hint2:'tending to talk a great deal. e.g. never lost for words, Emily is _________',
+      hint3:'last letter is s'
+    },
   ];
   var originalWord = null;
   var intervalStart = null;
@@ -58,7 +98,7 @@ $(() => {
   // gets a random word (originalWord) from array of words (wordsArray)
   function play() {
     $('.question').empty();
-    var randomNumber = Math.floor(Math.random() * 2);
+    var randomNumber = Math.floor(Math.random() * 11);
     originalWord = words[randomNumber];
     console.log(originalWord);
 
@@ -66,12 +106,19 @@ $(() => {
       timer=59;
       timeInterval=setInterval(tim,1000);
 
+      function updateSc(){
+        score=score+1;
+        scoreBoard.empty()
+        scoreBoard.append(score);
+      }
+
     }
     function tim(){
       timeBoard.empty()
       timeBoard.append(timer);
       timer=timer-1;
     }
+    updateSc();
 
     // shuffles (shuffled) the original word (originalWord)
     var shuffled = originalWord.split('').sort(function() {
@@ -93,10 +140,11 @@ $(() => {
     var ans = $('#answer').val();
     if(ans === originalWord) {
       updateEnergy();
+      updateSc();
       isWin();
       play();
     } else {
-      window.alert('Sorry! Try again');
+      window.alert("The answer is" + " " + originalWord);
     }
     //play();
     //intervalStart=setInterval(play,15000);

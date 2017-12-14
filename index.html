@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css?family=Crimson+Text|Indie+Flower" rel="stylesheet">
 </head>
 <body>
+  <div class="game-view">
   <div class="top-section">
     <div class="score-section">
       <button id="hint1-button">Click for a hint</button>
@@ -21,17 +22,22 @@
     </div>
     <div class="title-section">
       <h1>Verbal Diarrhoea.</h1>
-      <h2>Learn new words by solving anagrams</h2>
+      <h2>Learn new words while you're on the toilet</h2>
     </div>
     <div class="energy-section">
       <center>
       <div class="energy-bar">
         <div id="filling"></div>
       </div>
+      <div class="score-circle">
+              <br>
+              <label class="score-label">Score</label><br>
+              <strong id="score"></strong>
+            </div>
       <div class="timer-circle">
         <br>
-        <label class="timer-label"></label><br>
-        <strong id="time">60</strong>
+        <label class="timer-label">Timer</label><br>
+        <strong id="time"></strong>
       </div>
     </center>
     </div>
@@ -45,10 +51,11 @@
     		</div>
     	</div>
     	<div class="answer-section">
-    		<input type="text" name="" id="answer" placeholder="type your answer here">
+    		<input type="text" name="" id="answer" placeholder="type solution to the anagram here">
     		<button class="submit">submit</button>
     	</div>
     </div>
+  </div>
     <script src="./js/script.js"></script>
 </body>
 </html>

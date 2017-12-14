@@ -36,6 +36,29 @@ body,html {
   overflow:hidden;
 }
 
+.score-circle{
+  width:100px;
+  height:100px;
+  border-radius:50%;
+  border:1px solid white;
+  margin-top:20px;
+}
+
+.score-label{
+  text-align:center;
+  font-family:sans-serif;
+  font-size:20px;
+  color:grey;
+  margin-top:10px;
+}
+
+#score{
+  font-size:25px;
+  font-weight: lighter;
+  color:cyan;
+  font-family:sans-serif;
+}
+
 #filling{
   width:10%;
   height:100%;
@@ -138,6 +161,15 @@ h2 {
   font-size:20px;
   color: darkblue;
 }
+
+#score {
+    font-size:30px;
+    color:black;
+    font-family: 'Fascinate Inline', cursive;
+    float:left;
+    padding-left: 5px;
+    text-align: justify;
+  }
 
 #timer {
 
