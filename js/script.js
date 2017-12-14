@@ -96,95 +96,114 @@ $(() => {
 
 
   // gets a random word (originalWord) from array of words (wordsArray)
-  function play() {
-    $('.question').empty();
-    var randomNumber = Math.floor(Math.random() * 11);
-    originalWord = words[randomNumber];
-    console.log(originalWord);
 
-    function updateTimer(){
-      timer=59;
-      timeInterval=setInterval(tim,1000);
 
-      function updateSc(){
-        score=score+1;
-        scoreBoard.empty()
-        scoreBoard.append(score);
-      }
 
-    }
-    function tim(){
-      timeBoard.empty()
-      timeBoard.append(timer);
-      timer=timer-1;
-    }
+
+
+
+
+
+});
+
+// function updateScore() {
+//   score=score+10; // use the score variable to update the css height of the inner energy bar div
+//   $('#score').innerHTML=score;
+// }
+
+function updateEnergy(){
+  energy=energy+40;
+  energyBar.css({"width":energy+"%"});
+}
+updateEnergy();
+
+
+// sets interval of emptying table to 15s
+
+
+clearInterval(intervalStart);
+
+function isWin(){
+  if(energy>=100){
+    window.alert("Great effort! Play again?");
+    clearInterval(timer);
+    clearInterval(intervalStart);
+  }
+
+}
+intervalStart = setInterval(play,61000);
+play();
+
+
+function updateTimer(){
+  timer=59;
+  timeInterval=setInterval(tim,1000);
+
+  function updateSc(){
+    score=score+1;
+    scoreBoard.empty()
+    scoreBoard.append(score);
+  }
+
+}
+
+function play() {
+  $('.question').empty();
+  var randomNumber = Math.floor(Math.random() * 11);
+  originalWord = words[randomNumber];
+  console.log(originalWord);
+
+
+
+
+  function tim(){
+    timeBoard.empty()
+    timeBoard.append(timer);
+    timer=timer-1;
+  }
+  updateSc();
+
+  // shuffles (shuffled) the original word (originalWord)
+  var shuffled = originalWord.split('').sort(function() {
+    return 0.5 - Math.random();
+  }).join('');
+  console.log(shuffled);
+
+  // appends the shuffled word (shuffledWord) to table data cells
+  for(let i=0;i<shuffled.length;i++) {
+    var shuffledWord=shuffled.split('');
+    $('.question').append("<td id='letter'>"+shuffledWord[i]+"</td>");
+  }
+
+  console.log(shuffledWord);
+}
+// checks answer (checkAnswer) submitted by user against original word (originalWord)
+
+
+
+
+
+
+
+function checkAnswer() {
+  var ans = $('#answer').val();
+  if(ans === originalWord) {
+    updateEnergy();
     updateSc();
-
-    // shuffles (shuffled) the original word (originalWord)
-    var shuffled = originalWord.split('').sort(function() {
-      return 0.5 - Math.random();
-    }).join('');
-    console.log(shuffled);
-
-    // appends the shuffled word (shuffledWord) to table data cells
-    for(let i=0;i<shuffled.length;i++) {
-      var shuffledWord=shuffled.split('');
-      $('.question').append("<td id='letter'>"+shuffledWord[i]+"</td>");
-    }
+    isWin();
+    clearInterval(timeInterval);
     updateTimer();
-
-    console.log(shuffledWord);
+    play();
+  } else {
+    window.alert("The answer is" + " " + originalWord);
   }
-  // checks answer (checkAnswer) submitted by user against original word (originalWord)
-  function checkAnswer() {
-    var ans = $('#answer').val();
-    if(ans === originalWord) {
-      updateEnergy();
-      updateSc();
-      isWin();
-      play();
-    } else {
-      window.alert("The answer is" + " " + originalWord);
-    }
-    //play();
-    //intervalStart=setInterval(play,15000);
-  }
+  //play();
+  //intervalStart=setInterval(play,15000);
+}
 
 
-
-
-
-  $('.submit').click(function() {
-    checkAnswer();
-    $('#answer').val('');
-
-  });
-
-  // function updateScore() {
-  //   score=score+10; // use the score variable to update the css height of the inner energy bar div
-  //   $('#score').innerHTML=score;
-  // }
-
-  function updateEnergy(){
-    energy=energy+40;
-    energyBar.css({"width":energy+"%"});
-  }
-  updateEnergy();
-
-
-  // sets interval of emptying table to 15s
-  intervalStart = setInterval(play,15000);
-  play();
-
-  clearInterval(intervalStart);
-
-  function isWin(){
-    if(energy>=100){
-      window.alert("you win");
-      clearInterval(timer);
-      clearInterval(intervalStart);
-    }
-
-  }
+$('.submit').click(function() {
+  checkAnswer();
+  $('#answer').val('');
 
 });
