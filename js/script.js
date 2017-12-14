@@ -80,13 +80,17 @@ $(() => {
   ];
   var originalWord = null;
   var intervalStart = null;
-  var score = 0;
+  var score = -1;
   var timer = 59;
   var timeBoard=$('#time');
   var hint = null;
   var reward = null;
   var energyBar=$('#filling');
   var energy= 0;
+  var lives = null;
+  var firstTime = false;
+  var scoreBoard=$('#score');
+  var timeBoard=$('#time');
   // $("#hint1-button").hide();
   $("#hint2-button").hide();
   $("#hint3-button").hide();
@@ -95,30 +99,10 @@ $(() => {
   $('#hint3').hide();
 
 
-  // gets a random word (originalWord) from array of words (wordsArray)
 
-
-
-
-
-
-
-
-});
-
-// function updateScore() {
-//   score=score+10; // use the score variable to update the css height of the inner energy bar div
-//   $('#score').innerHTML=score;
-// }
 
 updateEnergy();
 updateSc();
-
-
-// sets interval of emptying table to 15s
-
-intervalStart = setInterval(play,61000);
-play();
 
 function updateEnergy(){
   energy=energy+40;
@@ -147,7 +131,6 @@ function updateTimer(){
   timeInterval=setInterval(tim,1000);
 
 
-
 }
 function tim(){
   timeBoard.empty()
@@ -169,13 +152,11 @@ function play() {
   console.log(originalWord);
 
 
-  // shuffles (shuffled) the original word (originalWord)
   var shuffled = originalWord.split('').sort(function() {
     return 0.5 - Math.random();
   }).join('');
   console.log(shuffled);
 
-  // appends the shuffled word (shuffledWord) to table data cells
   for(let i=0;i<shuffled.length;i++) {
     var shuffledWord=shuffled.split('');
     $('.question').append("<td id='letter'>"+shuffledWord[i]+"</td>");
@@ -183,7 +164,6 @@ function play() {
 
   console.log(shuffledWord);
 }
-// checks answer (checkAnswer) submitted by user against original word (originalWord)
 
 function checkAnswer() {
   var ans = $('#answer').val();
@@ -197,13 +177,16 @@ function checkAnswer() {
   } else {
     window.alert("The answer is" + " " + originalWord);
   }
-  //play();
-  //intervalStart=setInterval(play,15000);
+
 }
 
 
 $('.submit').click(function() {
   checkAnswer();
   $('#answer').val('');
+
+});
+intervalStart = setInterval(play,61000);
+play();
 
 });
