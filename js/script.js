@@ -1,5 +1,7 @@
 $(() => {
 
+
+
   var words = ['vitriolic','specious','platitude','conceited','obtuse','assiduous','portend','hubris','incandescent','entreaty','loquacious','fatuous','prophylaxis','obsequious','groundswell','vapid','resonate','excoriates','sequestered','commendable','misgivings','askance','parsimonious','parlous','decorum','perfunctory','acerbic','obstreperous','pejorative','jettison','deference','ebullient','inveterate','fascile','mainspring','circumspect','martial','yardstick','scintilla','bootstrap','assinine','taciturn','carousing','pernicious','pastiche','retrograde','cavalier','abstruse','propitiate','hackneyed','hoodwink','jaundiced','earmark','mainstay','nettlesome','redolent','frogmarch','doyenne','magnanimous','lilliputian','vaudevillian','admonish','moribund','pallid','fastidious','sanguine','delineate','capricious','restitution','megalomania','corraled','vacillate','gregarious','specious','vertiginous','remiss','flippant','lascivious','apopleptic','axiomatic'];
   var obj=[
     {
@@ -71,7 +73,7 @@ $(() => {
   ];
   var originalWord = null;
   var intervalStart = null;
-  var score = 0;
+  var score = -1;
   var timer = 59;
   var timeBoard=$('#time');
   var hint = null;
@@ -82,16 +84,26 @@ $(() => {
   var firstTime = false;
   var scoreBoard=$('#score');
   var timeBoard=$('#time');
+  $(".game-view").show();
 
+  $('#hint1-button').click(function(){
+    showHint(1);
+  });
+  $('#hint2-button').click(function(){
+    showHint(2);
+  });
+  $('#hint3-button').click(function(){
+    showHint(3);
+  });
 
-  function hintStart(){
+  function initializer(){
     $("#hint1-button").hide();
     $("#hint2-button").hide();
     $("#hint3-button").hide();
     $('#hint1').hide();
     $('#hint2').hide();
     $('#hint3').hide();
-    updateTimer();
+    updateTimer()
   }
 
   updateEnergy();
@@ -128,6 +140,21 @@ $(() => {
     }
     timer=59;
     timeInterval=setInterval(tim,1000);
+
+
+  }
+
+
+  function showHint(hintNumber){
+    if(hintNumber==1){
+      $("#hint1").slideToggle(1000);
+    }else
+    if(hintNumber==2){
+      $("#hint2").slideToggle(1000);
+    }else
+    if(hintNumber==3){
+      $("#hint3").slideToggle(1000);
+    }
   }
 
   function checkHint(){
@@ -149,7 +176,14 @@ $(() => {
     timer=timer-1;
     console.log(timer);
   }
-
+  function hintAssign(i){
+  $("#hint1").empty();
+  $("#hint2").empty();
+  $("#hint3").empty();
+  $("#hint1").append(obj[i].hint1);
+  $("#hint2").append(obj[i].hint2);
+  $("#hint3").append(obj[i].hint3);
+}
 
   function play() {
     $('.question').empty();
@@ -157,19 +191,24 @@ $(() => {
       clearInterval(timeInterval);
     };
     firstTime=true;
-    hintStart();
+    initializer();
     var randomNumber = Math.floor(Math.random() * 11);
     originalWord = words[randomNumber];
+    hintAssign(randomNumber);
+
+    console.log(originalWord);
 
     var shuffled = originalWord.split('').sort(function() {
       return 0.5 - Math.random();
     }).join('');
+    console.log(shuffled);
 
     for(let i=0;i<shuffled.length;i++) {
       var shuffledWord=shuffled.split('');
       $('.question').append("<td id='letter'>"+shuffledWord[i]+"</td>");
     }
 
+    console.log(shuffledWord);
   }
 
   function checkAnswer() {
@@ -184,7 +223,7 @@ $(() => {
       intervalStart=setInterval(play,60000);
       updateTimer();
     } else {
-      window.alert("Try again! For clues click on the hints as they appear");
+      window.alert("Sorry! Wait for clues to appear and try again!");
     }
 
   }
