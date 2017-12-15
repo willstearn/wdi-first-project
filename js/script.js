@@ -1,8 +1,6 @@
 $(() => {
 
-
-
-  var words = ['vitriolic','specious','platitude','conceited','obtuse','assiduous','portend','hubris','incandescent','entreaty','loquacious','fatuous','prophylaxis','obsequious','groundswell','vapid','resonate','excoriates','sequestered','commendable','misgivings','askance','parsimonious','parlous','decorum','perfunctory','acerbic','obstreperous','pejorative','jettison','deference','ebullient','inveterate','fascile','mainspring','circumspect','martial','yardstick','scintilla','bootstrap','assinine','taciturn','carousing','pernicious','pastiche','retrograde','cavalier','abstruse','propitiate','hackneyed','hoodwink','jaundiced','earmark','mainstay','nettlesome','redolent','frogmarch','doyenne','magnanimous','lilliputian','vaudevillian','admonish','moribund','pallid','fastidious','sanguine','delineate','capricious','restitution','megalomania','corraled','vacillate','gregarious','specious','vertiginous','remiss','flippant','lascivious','apopleptic','axiomatic'];
+  var words = ['vitriolic','specious','platitude','conceited','obtuse','pernicious','flippant','hubris','pejorative','moribund','loquacious','perfunctory','fatuous','facile','capricious','prophylaxis','obsequious','groundswell','vapid','resonate','excoriates','sequestered','commendable','misgivings','askance','parsimonious','parlous','decorum','acerbic','obstreperous','incandescent','jettison','deference','ebullient','inveterate','mainspring','circumspect','martial','yardstick','scintilla','bootstrap','assinine','taciturn','carousing','assiduous','pastiche','retrograde','cavalier','abstruse','propitiate','hackneyed','hoodwink','jaundiced','earmark','mainstay','nettlesome','redolent','frogmarch','doyenne','magnanimous','lilliputian','vaudevillian','admonish','entreaty','pallid','fastidious','sanguine','delineate','restitution','megalomania','corraled','vacillate','gregarious','specious','vertiginous','remiss','portend','lascivious','apopleptic','axiomatic'];
   var obj=[
     {
       word:words[0],
@@ -24,7 +22,7 @@ $(() => {
     },
     {
       word:words[3],
-      hint1:'proudly vain. e.g. Ben is so _________',
+      hint1:'proudly vain. e.g. Trump is so _________',
       hint2:'first letter is c',
       hint3:'last letter is d'
     },
@@ -36,15 +34,15 @@ $(() => {
     },
     {
       word:words[5],
-      hint1:'showing great care and perseverance. e.g. she was __________ in her work',
-      hint2:'first letter is a',
+      hint1:'subtly harmful. e.g. the __________ influences of the mass media',
+      hint2:'first letter is p',
       hint3:'last letter is s'
     },
     {
       word:words[6],
-      hint1:'sign or warning. e.g. the eclipses _______ some major events',
-      hint2: 'first letter is p',
-      hint3:'last letter is d'
+      hint1:'not showing a serious or respectful attitude. e.g. a flippant remark',
+      hint2: 'first letter is f',
+      hint3:'last letter is t'
     },
     {
       word:words[7],
@@ -54,15 +52,15 @@ $(() => {
     },
     {
       word:words[8],
-      hint1:'full of strong emotion. e.g. __________ with rage',
-      hint2:'first letter is i',
-      hint3:'last letter is t'
+      hint1:'expressing contempt. e.g. permissiveness is almost always used as a __________ term',
+      hint2:'first letter is p',
+      hint3:'last letter is e'
     },
     {
       word:words[9],
-      hint1:'earnest or humble request. e.g. the king was deaf to his _______',
-      hint2: 'first letter is e',
-      hint3:'last letter is y'
+      hint1:'in terminal decline. e.g. the countrys ________ shipbuilding industry',
+      hint2: 'first letter is m',
+      hint3:'last letter is d'
     },
     {
       word:words[10],
@@ -70,6 +68,32 @@ $(() => {
       hint2:'first letter is l',
       hint3:'last letter is s'
     },
+    {
+      word:words[11],
+      hint1:'carried out without real interest. e.g. he gave a __________ nod',
+      hint2:'first letter is p',
+      hint3:'last letter is y'
+    },
+    {
+      word:words[12],
+      hint1:'silly and pointless. e.g. a _______ comment',
+      hint2:'first letter is f',
+      hint3:'last letter is s'
+    },
+    {
+      word:words[13],
+      hint1:'ignoring the true complexities of an issue. e.g. ______ generalizations',
+      hint2:'first letter is f',
+      hint3:'last letter is e'
+    },
+    {
+      word:words[14],
+      hint1:'given to sudden changes of mood or behaviour. e.g. a __________ boss',
+      hint2:'first letter is c',
+      hint3:'last letter is s'
+    }
+
+
   ];
   var originalWord = null;
   var intervalStart = null;
@@ -83,8 +107,7 @@ $(() => {
   var lives = null;
   var firstTime = false;
   var scoreBoard=$('#score');
-  var timeBoard=$('#time');
-  $(".game-view").show();
+  var audio = document.getElementById('audio');
 
   $('#hint1-button').click(function(){
     showHint(1);
@@ -121,8 +144,8 @@ $(() => {
   }
 
   function giveAnswer() {
-   window.alert("The answer is" + " " + originalWord);
- };
+    window.alert("The answer is" + " " + originalWord);
+  }
 
   function isWin(){
     if(energy>=100){
@@ -131,8 +154,8 @@ $(() => {
       clearInterval(timer);
       clearInterval(intervalStart);
     }
-
   }
+
   function updateTimer(){
     if(timer<=0){
       giveAnswer();
@@ -140,8 +163,6 @@ $(() => {
     }
     timer=59;
     timeInterval=setInterval(tim,1000);
-
-
   }
 
 
@@ -174,29 +195,27 @@ $(() => {
     timeBoard.empty()
     timeBoard.append(timer);
     timer=timer-1;
-    console.log(timer);
   }
+
   function hintAssign(i){
-  $("#hint1").empty();
-  $("#hint2").empty();
-  $("#hint3").empty();
-  $("#hint1").append(obj[i].hint1);
-  $("#hint2").append(obj[i].hint2);
-  $("#hint3").append(obj[i].hint3);
-}
+    $("#hint1").empty();
+    $("#hint2").empty();
+    $("#hint3").empty();
+    $("#hint1").append(obj[i].hint1);
+    $("#hint2").append(obj[i].hint2);
+    $("#hint3").append(obj[i].hint3);
+  }
 
   function play() {
     $('.question').empty();
     if(firstTime==true){
       clearInterval(timeInterval);
-    };
+    }
     firstTime=true;
     initializer();
-    var randomNumber = Math.floor(Math.random() * 11);
+    var randomNumber = Math.floor(Math.random() * 12);
     originalWord = words[randomNumber];
     hintAssign(randomNumber);
-
-    console.log(originalWord);
 
     var shuffled = originalWord.split('').sort(function() {
       return 0.5 - Math.random();
@@ -207,13 +226,12 @@ $(() => {
       var shuffledWord=shuffled.split('');
       $('.question').append("<td id='letter'>"+shuffledWord[i]+"</td>");
     }
-
-    console.log(shuffledWord);
   }
 
   function checkAnswer() {
     var ans = $('#answer').val();
-    if(ans == originalWord) {
+    if(ans === originalWord) {
+      audio.play();
       updateEnergy();
       updateSc();
       isWin();
@@ -223,19 +241,15 @@ $(() => {
       intervalStart=setInterval(play,60000);
       updateTimer();
     } else {
-      window.alert("Sorry! Wait for clues to appear and try again!");
+      window.alert("Try again! For clues, click on the hint buttons as they appear");
     }
-
   }
-
 
   $('.submit').click(function() {
     checkAnswer();
     $('#answer').val('');
-
-
   });
+
   intervalStart = setInterval(play,61000);
   play();
-
 });
